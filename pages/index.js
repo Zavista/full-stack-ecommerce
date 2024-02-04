@@ -1,6 +1,19 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
+
 
 export default function Home() {
+
+  const [productsInfo, setProdcutsInfo] = useState([]);
+  const getProducts = async () => {
+    const response = await fetch('/api/products');
+    const data = await response.json();
+    setProdcutsInfo(data);
+  }
+  useEffect(() => {
+    getProducts();
+  },[])
+
   return (
     <div className="p-5">
       <div>
