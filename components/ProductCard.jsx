@@ -12,7 +12,7 @@ const ProductCard = ({name, price, description, picture}) => {
         </div>
         <p className="text-sm mt-1 leading-4">{description}</p>
         <div className="flex items-center justify-between mt-1">
-              <div className="text-2xl font-bold">$899</div>
+              <div className="text-2xl font-bold">{`$${price}`}</div>
               <button className="bg-emerald-400 text-white py-1 px-3">Add to Cart</button>
         </div>
     </div>
