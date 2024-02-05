@@ -111,7 +111,7 @@ const checkout = () => {
           <input
           name="address"
             value={address}
-            onChange={(e) => setAdress(e.target.value)}
+            onChange={(e) => setAddress(e.target.value)}
             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
             type="text"
             placeholder="Street Address"
