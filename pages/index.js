@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import { connectMongoose } from "@/lib/mongoose";
 import { findAllProducts } from "./api/products";
+import Layout from "@/components/Layout";
 
 export default function Home({products}) {
 
@@ -16,7 +17,7 @@ export default function Home({products}) {
   const categoriesNames  = [... new Set(products.map(product => product.category))];
 
   return (
-    <div className="p-5">
+    <Layout>
       <input value={searchInput} onChange={e => setSearchInput(e.target.value)} type="text" placeholder="Search for products..." className="bg-gray-100 w-full py-2 px-4 rounded-xl"></input>
       <div>
         {categoriesNames.map(category => (
@@ -32,12 +33,12 @@ export default function Home({products}) {
           </div>
         ))}
       </div>
-    </div>
+    </Layout>
   );
 }
 
 
-export async function getServerSideProps() {
+export async function getServerSideProps() { 
   await connectMongoose();
   const products = await findAllProducts(); //from our api
   return {
