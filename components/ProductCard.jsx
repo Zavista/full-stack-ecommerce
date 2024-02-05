@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-const ProductCard = ({name, price, description, picture}) => {
+const ProductCard = ({_id, name, price, description, picture}) => {
   return (
     <div className="w-64">
         <div className="bg-blue-100 p-5 rounded-xl">

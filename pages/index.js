@@ -26,7 +26,7 @@ export default function Home({products}) {
             <div className='flex overflow-x-scroll '>
               {products.filter(product => product.category === category).map(product => (
                 <div key={product._id} className="mr-5 mb-8">
-                  <ProductCard name={product.name} price={product.price} description={product.description} picture={product.picture}></ProductCard>
+                  <ProductCard {...product}></ProductCard>
                 </div>
               ))}
             </div>
