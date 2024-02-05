@@ -1,28 +1,19 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
+import { connectMongoose } from "@/lib/mongoose";
+import { findAllProducts } from "./api/products";
 
-export default function Home() {
+export default function Home({products}) {
 
-  const [productsInfo, setProdcutsInfo] = useState([]);
   const [searchInput, setSearchInput] = useState('');
-  const getProducts = async () => {
-    const response = await fetch('/api/products');
-    const data = await response.json();
-    setProdcutsInfo(data);
-  }
-  useEffect(() => {
-    getProducts();
-  },[])
 
-  let products;
+
   if (searchInput) {
-    products= productsInfo.filter(p => p.name.toLowerCase().includes(searchInput.toLowerCase()));
-  } else {
-    products = productsInfo;
-  }
+    products= products.filter(p => p.name.toLowerCase().includes(searchInput.toLowerCase()));
+  } 
 
-  const categoriesNames  = [... new Set(productsInfo.map(product => product.category))];
+  const categoriesNames  = [... new Set(products.map(product => product.category))];
 
   return (
     <div className="p-5">
@@ -43,4 +34,15 @@ export default function Home() {
       </div>
     </div>
   );
+}
+
+
+export async function getServerSideProps() {
+  await connectMongoose();
+  const products = await findAllProducts(); //from our api
+  return {
+    props: {
+      products: JSON.parse(JSON.stringify(products)),
+    }
+  }
 }
