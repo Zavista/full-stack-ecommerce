@@ -11,7 +11,7 @@ const ProductCard = ({_id, name, price, description, picture}) => {
   return (
     <div className="w-64">
         <div className="bg-blue-100 p-5 rounded-xl">
-            <img src={picture} alt="iphone"  className='w-[250px] h-[200px] object-contain'></img>
+            <img src={picture} alt="iphone"  className='w-[220px] h-[180px] md:w-[300px] md:h-[225px] object-contain'></img>
         </div>
         <div className="mt-2">
             <h3 className="font-bold text-lg">{name}</h3>
