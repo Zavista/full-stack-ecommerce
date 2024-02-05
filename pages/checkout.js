@@ -95,6 +95,7 @@ const checkout = () => {
             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
             type="text"
             placeholder="Full Name"
+            required
           />
 
           <input
@@ -104,6 +105,7 @@ const checkout = () => {
             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
             type="text"
             placeholder="Email"
+            required
           />
 
           <input
@@ -113,6 +115,7 @@ const checkout = () => {
             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
             type="text"
             placeholder="Street Address"
+            required
           />
 
           <input
@@ -122,6 +125,7 @@ const checkout = () => {
             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
             type="text"
             placeholder="City"
+            required
           />
 
           <input
@@ -131,6 +135,7 @@ const checkout = () => {
             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
             type="text"
             placeholder="Country"
+            required
           />
 
           <input
@@ -140,6 +145,7 @@ const checkout = () => {
             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
             type="text"
             placeholder="Postal Code"
+            required
           />
         </div>
         <div className="mt-4">
