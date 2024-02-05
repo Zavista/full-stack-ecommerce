@@ -3,7 +3,7 @@ import { ProductsContext } from "@/components/ProductsContext"
 import { useContext, useEffect, useState } from "react"
 
 const checkout = () => {
-  const {selectedProducts} = useContext(ProductsContext);
+  const {selectedProducts, setSelectedProducts} = useContext(ProductsContext);
   const [productsInfo, setProductsInfo] = useState([]);
 
   const getProducts = async () => {
@@ -12,12 +12,26 @@ const checkout = () => {
       const response = await fetch(`/api/products?ids=${uniqIds.join(',')}`);
       const data = await response.json();
       setProductsInfo(data);
+    } else {
+      setProductsInfo([]);
     }
   };
   
   useEffect(() => {
     getProducts()
   },[selectedProducts])
+
+  const addProduct = (id) => {
+    setSelectedProducts(prev => [...prev, id]);
+  }
+
+  const removeProduct = (id) => {
+    const pos = selectedProducts.indexOf(id);
+    if (pos !==  -1) {
+      const newSelectedProducts = selectedProducts.filter((value, index) => index != pos );
+      setSelectedProducts(newSelectedProducts);
+    }
+  }
 
   return (
     <Layout>
@@ -37,9 +51,13 @@ const checkout = () => {
               <div className="flex justify-between">
                 <div className="font-bold">{`$${productInfo.price}`}</div>
                 <div className="flex items-center">
-                  <button className="border border-emerald-300 px-2 rounded-l text-emerald-500">-</button>
+                  <button 
+                   onClick={() => removeProduct(productInfo._id)}
+                  className="border border-emerald-300 px-2 rounded-l text-emerald-500">-</button>
                   <span className="px-2">{`${selectedProducts.filter(id => id === productInfo._id).length}`}</span>
-                  <button className="border border-emerald-300 px-2 rounded-l text-white-500 bg-emerald-500">+</button>
+                  <button 
+                  onClick={() => addProduct(productInfo._id)}
+                  className="border border-emerald-300 px-2 rounded-l text-white-500 bg-emerald-500">+</button>
                 </div>
               </div>
             </div>
