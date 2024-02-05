@@ -1,4 +1,5 @@
 import { connectMongoose } from "@/lib/mongoose";
+const stripe = require('stripe')('sk_test_...');
 
 export default async function handler(req, res) {
     await connectMongoose();
