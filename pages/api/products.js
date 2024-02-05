@@ -6,3 +6,7 @@ export default async function handle(req, res) {
     const response = await Product.find().exec();
     res.status(200).json(response);
 }
+
+export async function findAllProducts() {
+    return Product.find().exec();
+}
