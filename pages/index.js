@@ -21,12 +21,14 @@ export default function Home() {
       <div>
         {categoriesNames.map(category => (
           <div key={category}>
-            <h2 className="text-2xl capitalize">{category}</h2>
-            {productsInfo.filter(product => product.category === category).map(product => (
-              <div key={product.name}>
-                <ProductCard name={product.name} price={product.price} description={product.description} picture={product.picture}></ProductCard>
-              </div>
-            ))}
+            <h2 className="text-2xl py-5 capitalize font-bold">{category}</h2>
+            <div className='flex overflow-x-scroll '>
+              {productsInfo.filter(product => product.category === category).map(product => (
+                <div key={product._id} className="mr-5 mb-8">
+                  <ProductCard name={product.name} price={product.price} description={product.description} picture={product.picture}></ProductCard>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
