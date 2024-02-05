@@ -5,6 +5,14 @@ import { useContext, useEffect, useState } from "react"
 const checkout = () => {
   const {selectedProducts, setSelectedProducts} = useContext(ProductsContext);
   const [productsInfo, setProductsInfo] = useState([]);
+  const [address, setAddress] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
+  const [postal, setPostal] = useState('');
+
+
 
   const getProducts = async () => {
     if (selectedProducts.length > 0) {
@@ -64,6 +72,70 @@ const checkout = () => {
           </div>
         ))
       )}
+      <div className="mt-4">
+        <h1 className="text-2xl font-bold mb-2">Billing Information</h1>
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
+          type="text"
+          placeholder="Full Name"
+        />
+
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
+          type="text"
+          placeholder="Email"
+        />
+
+        <input
+          value={address}
+          onChange={(e) => setAdress(e.target.value)}
+          className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
+          type="text"
+          placeholder="Street Address"
+        />
+
+        <input
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
+          type="text"
+          placeholder="City"
+        />
+
+        <input
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+          className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
+          type="text"
+          placeholder="Country"
+        />
+
+        <input
+          value={postal}
+          onChange={(e) => setPostal(e.target.value)}
+          className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
+          type="text"
+          placeholder="Postal Code"
+        />
+      </div>
+      <div className="mt-4">
+        <div className="flex justify-between my-2">
+          <h3 className="font-bold text-gray-400">Subtotal:</h3>
+          <h3 className="text-gray-400">$123</h3>
+        </div>
+        <div className="flex justify-between mb-4">
+          <h3 className="font-bold text-gray-400">Delivery:</h3>
+          <h3 className="text-gray-400">$10</h3>
+        </div>
+        <div className="flex justify-between my-2 border-dashed border-t border-emerald-500 pt-3">
+          <h3 className="font-bold text-2xl">Total:</h3>
+          <h3 className="text-2xl">$133</h3>
+        </div>
+      </div>
     </Layout>
   )
 }
