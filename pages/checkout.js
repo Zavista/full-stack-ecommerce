@@ -41,6 +41,16 @@ const checkout = () => {
     }
   }
 
+  const deliveryPrice = 5;
+  let subtotal = 0;
+  if (selectedProducts?.length) {
+    for (let id of selectedProducts) {
+      const price = productsInfo.find(p => p._id === id)?.price || 0;
+      subtotal += price;
+    }
+  }
+  const total = subtotal + deliveryPrice;
+
   return (
     <Layout>
       {productsInfo.length === 0 ? (
@@ -48,8 +58,10 @@ const checkout = () => {
           No products in your shopping cart!
         </div>
       ) : (
-        productsInfo.length > 0 && productsInfo.map(productInfo => (
-          <div key={productInfo.name} className="flex flex-col md:flex-row mb-3 md:w-[900px]"> 
+        
+        <div className="">
+          {productsInfo.length > 0 && productsInfo.map(productInfo => (
+          <div key={productInfo.name} className="flex flex-col md:flex-row mb-3 lg:w-[1000px]"> 
             <div className="bg-gray-100 p-3 rounded-xl mr-3 flex items-center justify-center">
               <img src={productInfo.picture} alt={productInfo.name} className="w-[150px] h-[120px]"></img>
             </div>
@@ -70,9 +82,10 @@ const checkout = () => {
               </div>
             </div>
           </div>
-        ))
+        ))}
+        </div>
       )}
-      <div className="mt-4">
+      <div className="mt-4 border-solid border-t-4 border-black-500 pt-3 ">
         <h1 className="text-2xl font-bold mb-2">Billing Information</h1>
         <input
           value={name}
@@ -125,17 +138,21 @@ const checkout = () => {
       <div className="mt-4">
         <div className="flex justify-between my-2">
           <h3 className="font-bold text-gray-400">Subtotal:</h3>
-          <h3 className="text-gray-400">$123</h3>
+          <h3 className="text-gray-400">{`$${subtotal}`}</h3>
         </div>
         <div className="flex justify-between mb-4">
           <h3 className="font-bold text-gray-400">Delivery:</h3>
-          <h3 className="text-gray-400">$10</h3>
+          <h3 className="text-gray-400">{`$${deliveryPrice}`}</h3>
         </div>
         <div className="flex justify-between my-2 border-dashed border-t border-emerald-500 pt-3">
           <h3 className="font-bold text-2xl">Total:</h3>
-          <h3 className="text-2xl">$133</h3>
+          <h3 className="text-2xl">{`$${total}`}</h3>
         </div>
       </div>
+      <div className="flex flex-end">
+        <button className="bg-emerald-500 p-5 text-white w-full md:w-[25%] mt-2 mb-4 shadow-emerald-200 shadow-lg ml-auto">Pay ${total}</button>
+      </div>
+      
     </Layout>
   )
 }
