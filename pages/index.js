@@ -17,7 +17,7 @@ export default function Home() {
 
   let products;
   if (searchInput) {
-    products= productsInfo.filter(p => p.name.toLowerCase().includes(searchInput))
+    products= productsInfo.filter(p => p.name.toLowerCase().includes(searchInput.toLowerCase()));
   } else {
     products = productsInfo;
   }
