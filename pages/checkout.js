@@ -104,7 +104,7 @@ const checkout = () => {
              value={email}
              onChange={(e) => setEmail(e.target.value)}
              className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
-             type="text"
+             type="email"
              placeholder="Email"
              required
            />
