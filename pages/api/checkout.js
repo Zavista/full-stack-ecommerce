@@ -1,4 +1,5 @@
 import { connectMongoose } from "@/lib/mongoose";
+import Order from "@/models/Order";
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 import Product from "@/models/Product";
 
@@ -10,7 +11,7 @@ export default async function handler(req, res) {
         return;
     }
 
-    const {email} = req.body;
+    const {email, name, address, city, country, postal} = req.body;
 
     const productsIds = req.body.products.split(',');
     const uniqIds = [...new Set(productsIds)];
@@ -31,13 +32,29 @@ export default async function handler(req, res) {
         })
     }
 
+    const order = await Order.create({
+        products:line_items,
+        paid:0,
+        name: name,
+        email: email,
+        address: address,
+        city: city,
+        country: country,
+        postal: postal
+    })
+
+
     const session = await stripe.checkout.sessions.create({
         line_items: line_items,
         mode: 'payment',
         customer_email: email,
         success_url: `${req.headers.origin}/?success=true`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
+        metadata: {orderId:order._id.toString()},
       });
-      res.redirect(303, session.url);
+
+      
+
+    res.redirect(303, session.url);
 
 }
