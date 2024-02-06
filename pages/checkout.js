@@ -85,91 +85,94 @@ const checkout = () => {
         ))}
         </div>
       )}
-      <form action='/api/checkout' method="POST">
-        <div className="mt-4 border-solid border-t-4 border-black-500 pt-3 ">
-          <h1 className="text-2xl font-bold mb-2">Billing Information</h1>
-          <input
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
-            type="text"
-            placeholder="Full Name"
-            required
-          />
+      {productsInfo.length > 0 && (
+         <form action='/api/checkout' method="POST">
+         <div className="mt-4 border-solid border-t-4 border-black-500 pt-3 ">
+           <h1 className="text-2xl font-bold mb-2">Billing Information</h1>
+           <input
+             name="name"
+             value={name}
+             onChange={(e) => setName(e.target.value)}
+             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
+             type="text"
+             placeholder="Full Name"
+             required
+           />
+ 
+           <input
+           name="email"
+             value={email}
+             onChange={(e) => setEmail(e.target.value)}
+             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
+             type="text"
+             placeholder="Email"
+             required
+           />
+ 
+           <input
+           name="address"
+             value={address}
+             onChange={(e) => setAddress(e.target.value)}
+             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
+             type="text"
+             placeholder="Street Address"
+             required
+           />
+ 
+           <input
+           name='city'
+             value={city}
+             onChange={(e) => setCity(e.target.value)}
+             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
+             type="text"
+             placeholder="City"
+             required
+           />
+ 
+           <input
+           name="country"
+             value={country}
+             onChange={(e) => setCountry(e.target.value)}
+             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
+             type="text"
+             placeholder="Country"
+             required
+           />
+ 
+           <input
+           name="postal"
+             value={postal}
+             onChange={(e) => setPostal(e.target.value)}
+             className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
+             type="text"
+             placeholder="Postal Code"
+             required
+           />
+         </div>
+         <div className="mt-4">
+           <div className="flex justify-between my-2">
+             <h3 className="font-bold text-gray-400">Subtotal:</h3>
+             <h3 className="text-gray-400">{`$${subtotal}`}</h3>
+           </div>
+           <div className="flex justify-between mb-4">
+             <h3 className="font-bold text-gray-400">Delivery:</h3>
+             <h3 className="text-gray-400">{`$${deliveryPrice}`}</h3>
+           </div>
+           <div className="flex justify-between my-2 border-dashed border-t border-emerald-500 pt-3">
+             <h3 className="font-bold text-2xl">Total:</h3>
+             <h3 className="text-2xl">{`$${total}`}</h3>
+           </div>
+       </div>
+       
+         <input type="hidden" name="products" value={selectedProducts.join(',')}></input>
+         <div className="flex flex-end">
+             <button type='submit' className="bg-emerald-500 p-5 text-white w-full md:w-[25%] mt-2 mb-4 shadow-emerald-200 shadow-lg ml-auto">Pay ${total}</button>
+         </div>
+       </form>
+      )
 
-          <input
-          name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
-            type="text"
-            placeholder="Email"
-            required
-          />
-
-          <input
-          name="address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
-            type="text"
-            placeholder="Street Address"
-            required
-          />
-
-          <input
-          name='city'
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
-            type="text"
-            placeholder="City"
-            required
-          />
-
-          <input
-          name="country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
-            type="text"
-            placeholder="Country"
-            required
-          />
-
-          <input
-          name="postal"
-            value={postal}
-            onChange={(e) => setPostal(e.target.value)}
-            className='bg-gray-100 w-full px-4 py-2 rounded-xl mb-2'
-            type="text"
-            placeholder="Postal Code"
-            required
-          />
-        </div>
-        <div className="mt-4">
-          <div className="flex justify-between my-2">
-            <h3 className="font-bold text-gray-400">Subtotal:</h3>
-            <h3 className="text-gray-400">{`$${subtotal}`}</h3>
-          </div>
-          <div className="flex justify-between mb-4">
-            <h3 className="font-bold text-gray-400">Delivery:</h3>
-            <h3 className="text-gray-400">{`$${deliveryPrice}`}</h3>
-          </div>
-          <div className="flex justify-between my-2 border-dashed border-t border-emerald-500 pt-3">
-            <h3 className="font-bold text-2xl">Total:</h3>
-            <h3 className="text-2xl">{`$${total}`}</h3>
-          </div>
-      </div>
-      
-        <input type="hidden" name="products" value={selectedProducts.join(',')}></input>
-        <div className="flex flex-end">
-            <button type='submit' className="bg-emerald-500 p-5 text-white w-full md:w-[25%] mt-2 mb-4 shadow-emerald-200 shadow-lg ml-auto">Pay ${total}</button>
-        </div>
-      </form>
-      
-      
+      }
+     
     </Layout>
   )
 }
