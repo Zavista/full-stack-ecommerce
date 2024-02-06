@@ -10,6 +10,8 @@ export default async function handler(req, res) {
         return;
     }
 
+    const {email} = req.body;
+
     const productsIds = req.body.products.split(',');
     const uniqIds = [...new Set(productsIds)];
     const products = await Product.find({_id:{$in:uniqIds}});
@@ -32,6 +34,7 @@ export default async function handler(req, res) {
     const session = await stripe.checkout.sessions.create({
         line_items: line_items,
         mode: 'payment',
+        customer_email: email,
         success_url: `${req.headers.origin}/?success=true`,
         cancel_url: `${req.headers.origin}/?canceled=true`,
       });
